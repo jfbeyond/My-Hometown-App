@@ -1,0 +1,43 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Bucaramanga Map</title>
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <div id="map"></div>
+  <div id="sidebar">
+	<h2>Bucaramanga</h2>
+	<h3>My Hometown</h3>
+    <div>
+      <form>
+        <input data-bind="textInput: userInput" id="search-box" placeholder="Type any of my favorite places...">
+      </form>
+    </div>
+    <div class="toggle-btn" onclick="toggleSidebar()">
+      <span></span> <span></span> <span></span><span></span>
+    </div>
+    <div>
+      <ul data-bind="foreach: filteredLocations">
+		<li data-bind="text: name, click: $parent.setPlace"></li>
+      </ul>
+    </div>
+	<hr>
+	<div class="wiki-title"><h3>And Wikipedia says...</h3></div>
+	<div class="wikipedia">
+		
+			<ul data-bind="foreach: LastPlace()" >
+				<li><a data-bind="attr: {href: $data}, text: $data" target="_blank"></a></li>
+			</ul>
+	</div>
+  </div>
+  <script src="js/Lib/knockout-3.4.2.js"></script>
+  <script src="js/app.js" type="text/javascript"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAIx_moOh034GzWFQFVNqAbZT9fOsBlxl0&callback=initMap"
+    onerror="errorHandling()"></script>
+  <script src="js/lib/jquery.min.js"></script>
+</body>
+</html>
+

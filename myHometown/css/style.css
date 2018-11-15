@@ -1,0 +1,129 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+}
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+#map {
+    bottom: 0px;
+    height: 100%;
+    left: 0px;
+    right: 0px;
+    position: absolute;
+}
+h2 {
+    color: #a9dbf2;
+    margin: 10px;
+    padding: 2px 2px;
+    font-family: helvetica;
+	font-size: 25px;
+}
+
+h3 {
+    color: rgba(230, 230, 230, 0.9);
+    margin: 10px;
+    padding: 2px 2px;
+    font-family: helvetica;
+	font-size: 15px;
+}
+
+
+
+body div form {
+    border-bottom: 50px;
+}
+
+#pano {
+    width: 200px;
+    height: 200px;
+      }
+	  
+#sidebar {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    background: #363b7f;
+    left: -250px;
+    transition: all 500ms linear;
+}
+#sidebar.active {
+    left: 0px;
+}
+#sidebar ul li {
+    color: rgba(230, 230, 230, 0.9);
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+	font-size: 13px;
+	font-family: helvetica;
+}
+
+#sidebar ul li:hover {
+    color: #fff;
+    background: #ed6607;
+}
+
+#sidebar .toggle-btn {
+    position: fixed;
+    left: 270px;
+    top: 15px;
+}
+#sidebar .toggle-btn span {
+    display: block;
+    width: 30px;
+    height: 4px;
+    background: #ed6607;
+    margin: 3px 0px;
+}
+
+
+#sidebar a {
+    color: #b0d6fc;
+    list-style: none;
+    padding: 5px 10px;
+	font-size: 70%;
+
+}
+
+#sidebar .wikipedia {
+	overflow: auto;
+    height: 100%;
+	padding:5px;
+	background-color: #444c59;
+	font-size: 15px;
+}
+
+#sidebar .wiki-title {
+
+	padding:5px;
+	background-color: #444c59;
+	font-size: 15px;
+}
+
+#sidebar .wikipedia ul li {
+    color: rgba(230, 230, 230, 0.9);
+    list-style: none;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(100, 100, 100, 0.3);
+	font-size: 17px;
+	font-family: helvetica;
+}
+
+#sidebar .wikipedia ul li:hover {
+    color: #fff;
+    background: #66545b;
+}
+
+#search-box {
+    background: #eee;
+    padding: 12px;
+    border: 1px solid;
+    width: 200px;
+	margin: 3px 0px;
+}
