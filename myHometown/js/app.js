@@ -232,9 +232,11 @@ var styles = [
     markers.push(marker);
 	
 	//viewModel.myLocations()[i].marker = marker;
-    // Create an onclick event to open the large infowindow at each marker.
+    // Create an onclick event to open the large infowindow at each marker and make Wikipedia place call
     marker.addListener('click', function() {
       populateInfoWindow(this, largeInfowindow);
+	  var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + this.name + '&format=json&callback=wikiCallback';
+	  viewModel.WikiCall(wikiUrl);
     });
 	// Two event listeners - one for mouseover, one for mouseout,
           // to change the colors back and forth.
@@ -378,18 +380,18 @@ var ViewModel = function() {
 		
 	self.currentPlace = ko.observable(this.placeList());
 	
-	// This function triggers wikipedia search based on clicked place on the list. 
+	// This function triggers marker selection based on clicked place on the list. 
 	self.setPlace = function(clickedPlace){
-		
+
 	  self.currentPlace(clickedPlace);
-		
 	  // Activate marker for selected place in the list
 	  google.maps.event.trigger(self.currentPlace(), 'click');
 
+	}
+	
+	// Separate Wikipedia AJAX call to use it when the marker is clicked
+	self.WikiCall = function(wikiUrl) {
 	  self.LastPlace.removeAll();
-	
-      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + self.currentPlace().name + '&format=json&callback=wikiCallback';
-	
 	  $.ajax({
 		url: wikiUrl,
 		dataType: "jsonp",
@@ -413,13 +415,12 @@ var ViewModel = function() {
 		  }
 		}
 		});
+	
 	}
+	
 }
 
 // Mouseover highlighted for sidebar
 function toggleSidebar() {
   document.getElementById("sidebar").classList.toggle('active');
 }
-
-
-
