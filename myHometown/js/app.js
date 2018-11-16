@@ -1,4 +1,3 @@
-
 //Global Variables
 var map;
 
@@ -226,12 +225,12 @@ var styles = [
       name: title,
       animation: google.maps.Animation.DROP,
 	  icon: defaultIcon,
+	  infowindow: largeInfowindow,
       id: i
     });
     // Push the marker to our array of markers.
     markers.push(marker);
-	
-	//viewModel.myLocations()[i].marker = marker;
+	  
     // Create an onclick event to open the large infowindow at each marker and make Wikipedia place call
     marker.addListener('click', function() {
       populateInfoWindow(this, largeInfowindow);
@@ -335,6 +334,12 @@ var Place = function(data) {
   this.name = ko.observable(data);
 }
 
+// Function to hide any open InfoWindow when filtering down the places
+function hideAllInfoWindows(map) {
+   markers.forEach(function(marker) {
+     marker.infowindow.close(map, marker);
+  }); 
+}
 
 // ViewModel - JavaScript that defines the data and behavior of your UI
 var ViewModel = function() {
@@ -356,13 +361,15 @@ var ViewModel = function() {
     // If nothing in the search window, then show all the places list
 	if (!filter) {
 	  self.myLocations().forEach(function(item){
-        item.setVisible(true);
+          item.setVisible(true);
       });
       return self.myLocations();
 	// If there's an input find the match and display it only
 	// Also delete the list of wikipedia founds if displayed
     } else {
-      self.LastPlace.removeAll();
+	  // Close any open infowindow and removes lingering wikipedia links
+      	  hideAllInfoWindows(map);
+	  self.LastPlace.removeAll();
 	  return ko.utils.arrayFilter(self.myLocations(), function(item) {
         var match = item.name.toLowerCase().indexOf(filter) >= 0
           item.setVisible(match);
